@@ -1,5 +1,9 @@
+import Board from "../../components/Board"
+
 const Sudoku = () =>{
-    return <h1>Hello world</h1>
+    return (
+        <Board />
+    )
 }
 
 export default Sudoku
