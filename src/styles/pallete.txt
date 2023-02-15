@@ -1,8 +1,1 @@
-https://coolors.co/ffb8d1-e4b4c2-e7cee3-e0e1e9-ddfdfe
-
-
-#ffb8d1
-#e4b4c2
-#e7cee3
-#e0e1e9
-#ddfdfe
+https://coolors.co/1f271b-31e981-6a7fdb-007ea7-ddfdfe

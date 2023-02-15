@@ -1,4 +1,14 @@
+@import "../../styles/variables";
+
 .line {
     display: flex;
-    margin-right: 10px;
+}
+.color-1 {
+    background-color: $blue1;
+}
+.color-2 {
+    background-color: $blue2;
+}
+.between-lines {
+    width: 10px;
 }
