@@ -2,6 +2,8 @@ import Styles from "./SquaresArea.module.scss";
 
 interface props {
 	id?: string;
+	x: "right" | "middle" | "left";
+	y: "top" | "center" | "bottom";
 }
 
 const SquaresArea = ({ id }: props) => {
