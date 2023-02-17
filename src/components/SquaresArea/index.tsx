@@ -15,26 +15,43 @@ const SquaresArea = ({ id, x, y }: props) => {
 	const color = getBackgroundColor(x, y);
 	return (
 		<>
-		<div className={Styles[color]}>
-			<div className={Styles.line}>
-				<div>{id}1</div>
-				<div>{id}2</div>
-				<div>{id}3</div>
+			<div className={Styles[color]}>
+				<div className={Styles.line}>
+					<div className={Styles["between-rows"]}></div>
+					<div>1</div>
+					<div className={Styles["between-rows"]}></div>
+
+					<div>2</div>
+					<div className={Styles["between-rows"]}></div>
+
+					<div>3</div>
+					<div className={Styles["between-rows"]}></div>
+				</div>
+				<br />
+				<div className={Styles.line}>
+					<div className={Styles["between-rows"]}></div>
+					<div>4</div>
+					<div className={Styles["between-rows"]}></div>
+
+					<div>5</div>
+					<div className={Styles["between-rows"]}></div>
+
+					<div>6</div>
+					<div className={Styles["between-rows"]}></div>
+				</div>
+				<br />
+				<div className={Styles.line}>
+					<div className={Styles["between-rows"]}></div>
+					<div>7</div>
+					<div className={Styles["between-rows"]}></div>
+
+					<div>8</div>
+					<div className={Styles["between-rows"]}></div>
+
+					<div>9</div>
+					<div className={Styles["between-rows"]}></div>
+				</div>
 			</div>
-			<br />
-			<div className={Styles.line}>
-				<div>{id}4</div>
-				<div>{id}5</div>
-				<div>{id}6</div>
-			</div>
-			<br />
-			<div className={Styles.line}>
-				<div>{id}7</div>
-				<div>{id}8</div>
-				<div>{id}9</div>
-			</div>
-		</div>
-		<div className={Styles['between-lines']}></div>
 		</>
 	);
 
