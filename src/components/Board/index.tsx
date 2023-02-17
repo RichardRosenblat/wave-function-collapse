@@ -1,23 +1,38 @@
+import { xOptions } from "../../types/xOptions";
+import { yOptions } from "../../types/yOptions";
+import { boardify } from "../../util/boardify";
 import SquaresArea from "../SquaresArea";
 import Styles from "./Board.module.scss";
+
+const values1D: number[] = [];
+
+for (let i = 0; i < 81; i++) {
+	values1D[i] = i;
+}
+
+const boardValues: number[][][][] = boardify(values1D);
+
 const Board = () => {
 	return (
 		<section className={Styles.container}>
-			<div className={Styles.area_group}>
-				<SquaresArea id={"A"} y="top" x="right" />
-				<SquaresArea id={"B"} y="top" x="middle" />
-				<SquaresArea id={"C"} y="top" x="left" />
-			</div>
-			<div className={Styles.area_group}>
-				<SquaresArea id={"D"} y="center" x="right" />
-				<SquaresArea id={"E"} y="center" x="middle" />
-				<SquaresArea id={"F"} y="center" x="left" />
-			</div>
-			<div className={Styles.area_group}>
-				<SquaresArea id={"G"} y="bottom" x="right" />
-				<SquaresArea id={"H"} y="bottom" x="middle" />
-				<SquaresArea id={"I"} y="bottom" x="left" />
-			</div>
+			{boardValues.map((rowOfAreas, rowOfAreasIndex) => {
+				const yOption = ["top", "center", "bottom"][rowOfAreasIndex] as yOptions;
+				const rowOfAreasId = yOption[0];
+
+				return (
+					<div className={Styles.area_group} key={rowOfAreasId}>
+						{rowOfAreas.map((area, areaIndex) => {
+							const xOption = ["right", "middle", "left"][areaIndex] as xOptions;
+
+							return (
+								<SquaresArea y={yOption} x={xOption}>
+									{area}
+								</SquaresArea>
+							);
+						})}
+					</div>
+				);
+			})}
 		</section>
 	);
 };

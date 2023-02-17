@@ -1,22 +1,24 @@
 @import "../../styles/variables";
 
-
 @mixin border {
-    border: 2px;
-    border-style : solid;
+	border: 2px;
+	border-style: solid;
+	border-color: $black;
 }
 
 .line {
-    display: flex;
+	display: flex;
 }
 .color-1 {
-    background-color: $blue1;
-    @include border;
+	background-color: $blue1;
+	color: $white;
+	@include border;
 }
 .color-2 {
-    background-color: $blue2;
-    @include border;
+	background-color: $blue2;
+	color: $white;
+	@include border;
 }
 .between-rows {
-    width: 10px;
+	width: 10px;
 }

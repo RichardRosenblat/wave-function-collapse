@@ -1,72 +1,54 @@
+import React from "react";
+import Square from "../Square";
 import Styles from "./SquaresArea.module.scss";
-
-type xOptions = "right" | "middle" | "left";
-
-type yOptions = "top" | "center" | "bottom";
+import { xOptions } from "../../types/xOptions";
+import { yOptions } from "../../types/yOptions";
 
 type colorOptions = "color-1" | "color-2";
 interface props {
-	id?: string;
 	x: xOptions;
 	y: yOptions;
+	children: number[][];
 }
 
-const SquaresArea = ({ id, x, y }: props) => {
-	const color = getBackgroundColor(x, y);
+const SquaresArea = ({ x, y, children: areaValues }: props) => {
+	const areaId = y[0] + x[0];
+	const color = getBackgroundColor(areaId);
+
 	return (
-		<>
-			<div className={Styles[color]}>
-				<div className={Styles.line}>
-					<div className={Styles["between-rows"]}></div>
-					<div>1</div>
-					<div className={Styles["between-rows"]}></div>
+		<div className={Styles[color]}>
+			{areaValues.map((line, lineIndex) => {
+				const yOption = ["top", "center", "bottom"][lineIndex] as yOptions;
+				const rowId = areaId + `[${yOption[0]}]`;
 
-					<div>2</div>
-					<div className={Styles["between-rows"]}></div>
+				return (
+					<React.Fragment key={rowId}>
+						<br />
+						<div className={Styles.line}>
+							<div className={Styles["between-rows"]}></div>
+							{line.map((item, columnIndex) => {
+								const xOption = ["left", "middle", "right"][columnIndex] as xOptions;
+								const cellId = areaId + `[${yOption[0] + xOption[0]}]`;
 
-					<div>3</div>
-					<div className={Styles["between-rows"]}></div>
-				</div>
-				<br />
-				<div className={Styles.line}>
-					<div className={Styles["between-rows"]}></div>
-					<div>4</div>
-					<div className={Styles["between-rows"]}></div>
-
-					<div>5</div>
-					<div className={Styles["between-rows"]}></div>
-
-					<div>6</div>
-					<div className={Styles["between-rows"]}></div>
-				</div>
-				<br />
-				<div className={Styles.line}>
-					<div className={Styles["between-rows"]}></div>
-					<div>7</div>
-					<div className={Styles["between-rows"]}></div>
-
-					<div>8</div>
-					<div className={Styles["between-rows"]}></div>
-
-					<div>9</div>
-					<div className={Styles["between-rows"]}></div>
-				</div>
-			</div>
-		</>
+								return (
+									<React.Fragment key={cellId}>
+										<Square x={xOption} y={yOption}>
+											{item}
+										</Square>
+										<div className={Styles["between-rows"]}></div>
+									</React.Fragment>
+								);
+							})}
+						</div>
+					</React.Fragment>
+				);
+			})}
+			<br />
+		</div>
 	);
 
-	function getBackgroundColor(x: xOptions, y: yOptions): colorOptions {
-		const map = {
-			right: 1,
-			middle: 2,
-			left: 3,
-
-			top: 1,
-			center: 2,
-			bottom: 3,
-		};
-
-		if (Math.abs(map[x] - map[y]) === 1) {
+	function getBackgroundColor(areaId: string): colorOptions {
+		if (["tm", "cr", "cl", "bm"].includes(areaId)) {
 			return "color-1";
 		}
 
