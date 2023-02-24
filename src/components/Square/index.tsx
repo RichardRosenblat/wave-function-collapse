@@ -1,3 +1,4 @@
+import { cell } from "../../types/cell";
 import { xOptions } from "../../types/xOptions";
 import { yOptions } from "../../types/yOptions";
 import Styles from "./Square.module.scss";
@@ -5,11 +6,16 @@ import Styles from "./Square.module.scss";
 interface props {
 	x: xOptions;
 	y: yOptions;
-	children: number;
+	children: cell;
 }
 
-const Square = ({ x, y, children: value }: props) => {
-	return <div className={Styles[x] + " " + Styles[y]}>{value < 0 ? "?" : value}</div>;
+const Square = ({ x, y, children: cell }: props) => {
+	const firstValueFromCell = cell.possibleStates.values().next().value;
+	return (
+		<div className={Styles[x] + " " + Styles[y]}>
+			{cell.hasCollapsed ? firstValueFromCell : "?"}
+		</div>
+	);
 };
 
 export default Square;

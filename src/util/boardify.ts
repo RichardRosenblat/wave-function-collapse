@@ -1,12 +1,14 @@
-export function boardify(array: number[]) {
+import { cell } from "../types/cell";
+
+export function boardify(array: cell[]) {
 	if (array.length !== 81) {
 		throw new Error("An array cannot be boardified if its lenght is other than 81");
 	}
 
-	const board: number[][][][] = [];
-	let areasRowInBoard: number[][][] = [];
-	let areasInAreaRow: number[][] = [];
-	let rowInArea: number[] = [];
+	const board: cell[][][][] = [];
+	let areasRowInBoard: cell[][][] = [];
+	let areasInAreaRow: cell[][] = [];
+	let rowInArea: cell[] = [];
 
 	for (let i = 0; i < array.length; i++) {
 		rowInArea.push(array[i]);

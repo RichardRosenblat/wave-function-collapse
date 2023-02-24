@@ -3,12 +3,13 @@ import Square from "../Square";
 import Styles from "./SquaresArea.module.scss";
 import { xOptions } from "../../types/xOptions";
 import { yOptions } from "../../types/yOptions";
+import { cell } from "../../types/cell";
 
 type colorOptions = "color-1" | "color-2";
 interface props {
 	x: xOptions;
 	y: yOptions;
-	children: number[][];
+	children: cell[][];
 }
 
 const SquaresArea = ({ x, y, children: areaValues }: props) => {
