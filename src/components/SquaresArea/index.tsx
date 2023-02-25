@@ -4,6 +4,7 @@ import Styles from "./SquaresArea.module.scss";
 import { xOptions } from "../../types/xOptions";
 import { yOptions } from "../../types/yOptions";
 import { cell } from "../../types/cell";
+import { cellId } from "../../types/cellId";
 
 type colorOptions = "color-1" | "color-2";
 interface props {
@@ -29,11 +30,11 @@ const SquaresArea = ({ x, y, children: areaValues }: props) => {
 							<div className={Styles["between-rows"]}></div>
 							{line.map((item, columnIndex) => {
 								const xOption = ["left", "middle", "right"][columnIndex] as xOptions;
-								const cellId = areaId + `[${yOption[0] + xOption[0]}]`;
+								const cellId = areaId + `[${yOption[0] + xOption[0]}]` as cellId;
 
 								return (
 									<React.Fragment key={cellId}>
-										<Square x={xOption} y={yOption}>
+										<Square id={cellId} x={xOption} y={yOption}>
 											{item}
 										</Square>
 										<div className={Styles["between-rows"]}></div>

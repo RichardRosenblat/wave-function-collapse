@@ -26,10 +26,10 @@ const Board = () => {
 				return (
 					<div className={Styles.area_group} key={rowOfAreasId}>
 						{rowOfAreas.map((area, areaIndex) => {
-							const xOption = ["right", "middle", "left"][areaIndex] as xOptions;
-
+							const xOption = ["left", "middle", "right"][areaIndex] as xOptions;
+							const areaId = rowOfAreasId + xOption[0];
 							return (
-								<SquaresArea y={yOption} x={xOption}>
+								<SquaresArea y={yOption} x={xOption} key={areaId}>
 									{area}
 								</SquaresArea>
 							);

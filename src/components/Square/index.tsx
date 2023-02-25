@@ -1,4 +1,5 @@
 import { cell } from "../../types/cell";
+import { cellId } from "../../types/cellId";
 import { xOptions } from "../../types/xOptions";
 import { yOptions } from "../../types/yOptions";
 import Styles from "./Square.module.scss";
@@ -6,6 +7,7 @@ import Styles from "./Square.module.scss";
 interface props {
 	x: xOptions;
 	y: yOptions;
+	id: cellId;
 	children: cell;
 }
 
