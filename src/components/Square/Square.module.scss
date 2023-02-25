@@ -19,3 +19,9 @@
 .bottom {
 	border-top: 2px solid $gray;
 }
+
+.cell {
+	&:hover{
+		cursor: pointer;
+	}
+}
