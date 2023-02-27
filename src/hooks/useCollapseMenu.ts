@@ -1,4 +1,4 @@
-import { collapseMenuState } from "../atoms/collapseMenu";
+import { collapseMenuState } from "../states/collapseMenuState";
 import { useRecoilState } from "recoil";
 import { cell } from "../types/cell";
 
