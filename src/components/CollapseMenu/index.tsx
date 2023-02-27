@@ -5,7 +5,11 @@ interface props {
 	closeModal: () => void;
 }
 
-const CollapseMenu = ({  closeModal, cell }: props) => {
+// TODO INSTALL RECOIL
+// TODO CREATE STYLES FOR COLLAPSEMENU
+// TODO CREATE HOOKS FOR BOARD
+
+const CollapseMenu = ({ closeModal, cell }: props) => {
 	return (
 		<>
 			<h2>Cell Id: {cell.id}</h2>
