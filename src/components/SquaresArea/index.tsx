@@ -4,7 +4,6 @@ import Styles from "./SquaresArea.module.scss";
 import { xOptions } from "../../types/xOptions";
 import { yOptions } from "../../types/yOptions";
 import { cell } from "../../types/cell";
-import { cellId } from "../../types/cellId";
 
 type colorOptions = "color-1" | "color-2";
 interface props {
@@ -21,20 +20,20 @@ const SquaresArea = ({ x, y, children: areaValues }: props) => {
 		<div className={Styles[color]}>
 			{areaValues.map((line, lineIndex) => {
 				const yOption = ["top", "center", "bottom"][lineIndex] as yOptions;
-				const rowId = areaId + `[${yOption[0]}]`;
+				const rowKey = areaId + `[${yOption[0]}]`;
 
 				return (
-					<React.Fragment key={rowId}>
+					<React.Fragment key={rowKey}>
 						<br />
 						<div className={Styles.line}>
 							<div className={Styles["between-rows"]}></div>
 							{line.map((item, columnIndex) => {
 								const xOption = ["left", "middle", "right"][columnIndex] as xOptions;
-								const cellId = areaId + `[${yOption[0] + xOption[0]}]` as cellId;
+								const cellKey = areaId + `[${yOption[0] + xOption[0]}]`;
 
 								return (
-									<React.Fragment key={cellId}>
-										<Square id={cellId} x={xOption} y={yOption}>
+									<React.Fragment key={cellKey}>
+										<Square x={xOption} y={yOption}>
 											{item}
 										</Square>
 										<div className={Styles["between-rows"]}></div>
