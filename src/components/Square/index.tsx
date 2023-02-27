@@ -1,10 +1,8 @@
-import { useState } from "react";
+import { useCollapseMenu } from "../../hooks/useCollapseMenu";
 import { cell } from "../../types/cell";
 import { xOptions } from "../../types/xOptions";
 import { yOptions } from "../../types/yOptions";
 import Styles from "./Square.module.scss";
-import Modal from "react-modal";
-import CollapseMenu from "../CollapseMenu";
 
 interface props {
 	x: xOptions;
@@ -13,26 +11,14 @@ interface props {
 }
 
 const Square = ({ x, y, children: cell }: props) => {
-	const [isModalOpen, setIsModalOpen] = useState(false);
+	const { open } = useCollapseMenu();
 
 	const firstValueFromCell = cell.possibleStates.values().next().value;
 
-	const openModal = () => {
-		setIsModalOpen(true);
-	};
-	function closeModal() {
-		setIsModalOpen(false);
-	}
-
 	return (
-		<>
-			<div className={Styles[x] + " " + Styles[y] + " " + Styles.cell} onClick={openModal}>
-				{cell.hasCollapsed ? firstValueFromCell : "?"}
-			</div>
-			<Modal isOpen={isModalOpen} onRequestClose={closeModal} contentLabel="Collapsing menu">
-				<CollapseMenu cell={cell} closeModal={closeModal}/>
-			</Modal>
-		</>
+		<div className={Styles[x] + " " + Styles[y] + " " + Styles.cell} onClick={() => open(cell)}>
+			{cell.hasCollapsed ? firstValueFromCell : "?"}
+		</div>
 	);
 };
 

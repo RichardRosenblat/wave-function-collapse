@@ -1,26 +1,25 @@
-import { cell } from "../../types/cell";
+import Modal from "react-modal";
+import { useCollapseMenu } from "../../hooks/useCollapseMenu";
+import FadeIn from "react-fade-in";
 
-interface props {
-	cell: cell;
-	closeModal: () => void;
-}
+const CollapseMenu = () => {
+	const { selectedCell: cell, close } = useCollapseMenu();
 
-// TODO INSTALL RECOIL
-// TODO CREATE STYLES FOR COLLAPSEMENU
-// TODO CREATE HOOKS FOR BOARD
-
-const CollapseMenu = ({ closeModal, cell }: props) => {
 	return (
-		<>
-			<h2>Cell Id: {cell.id}</h2>
-			<button onClick={closeModal}>close</button>
-			<div>Has collapsed: {cell.hasCollapsed ? "Yes" : "No"}</div>
-			<div>Possible states: {JSON.stringify(Array.from(cell.possibleStates.values()))}</div>
-			<h3> Collapse: </h3>
-			{Array.from(cell.possibleStates.values()).map((v) => {
-				return <button>{v}</button>;
-			})}
-		</>
+		<Modal isOpen={!!cell} onRequestClose={close} contentLabel="Collapsing menu" shouldCloseOnEsc>
+			{cell && (
+				<FadeIn>
+					<h2>Cell Id: {cell.id}</h2>
+					<button onClick={close}>close</button>
+					<div>Has collapsed: {cell.hasCollapsed ? "Yes" : "No"}</div>
+					<div>Possible states: {JSON.stringify(Array.from(cell.possibleStates.values()))}</div>
+					<h3> Collapse: </h3>
+					{Array.from(cell.possibleStates.values()).map((v) => {
+						return <button>{v}</button>;
+					})}
+				</FadeIn>
+			)}
+		</Modal>
 	);
 };
 
