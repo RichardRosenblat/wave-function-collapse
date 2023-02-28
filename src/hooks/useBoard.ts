@@ -11,9 +11,10 @@ export const useBoard = () => {
 		alert(`Cell: ${cell.id} collapsed into ${result}`);
 	};
 	const collapseAll = () => {};
-	const restore = () => {
+	const restoreAll = () => {
 		setBoard(defaultBoard);
 	};
+	const restore = (cell: cell) => {};
 
-	return { board: board as ReadonlyArray4D<cell>, restore, collapse, collapseAll };
+	return { board: board as ReadonlyArray4D<cell>, collapse, restore, collapseAll, restoreAll };
 };

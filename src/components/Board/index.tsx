@@ -15,22 +15,20 @@ const Board = () => {
 				const rowOfAreasKey = yOption[0];
 
 				return (
-					<>
-						<div className={Styles.area_group} key={rowOfAreasKey}>
-							{rowOfAreas.map((area, areaIndex) => {
-								const xOption = ["left", "middle", "right"][areaIndex] as xOptions;
-								const areaKey = rowOfAreasKey + xOption[0];
-								return (
-									<SquaresArea y={yOption} x={xOption} key={areaKey}>
-										{area}
-									</SquaresArea>
-								);
-							})}
-						</div>
-						<CollapseMenu />
-					</>
+					<div className={Styles.area_group} key={rowOfAreasKey}>
+						{rowOfAreas.map((area, areaIndex) => {
+							const xOption = ["left", "middle", "right"][areaIndex] as xOptions;
+							const areaKey = rowOfAreasKey + xOption[0];
+							return (
+								<SquaresArea y={yOption} x={xOption} key={areaKey}>
+									{area}
+								</SquaresArea>
+							);
+						})}
+					</div>
 				);
 			})}
+			<CollapseMenu />
 		</section>
 	);
 };
