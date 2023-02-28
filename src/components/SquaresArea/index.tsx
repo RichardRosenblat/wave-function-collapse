@@ -9,7 +9,7 @@ type colorOptions = "color-1" | "color-2";
 interface props {
 	x: xOptions;
 	y: yOptions;
-	children: cell[][];
+	children:  readonly (readonly cell[])[];
 }
 
 const SquaresArea = ({ x, y, children: areaValues }: props) => {

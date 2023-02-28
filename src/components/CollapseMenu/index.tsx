@@ -1,6 +1,5 @@
 import Modal from "react-modal";
 import { useCollapseMenu } from "../../hooks/useCollapseMenu";
-import FadeIn from "react-fade-in";
 import { useBoard } from "../../hooks/useBoard";
 
 const CollapseMenu = () => {
@@ -10,7 +9,7 @@ const CollapseMenu = () => {
 	return (
 		<Modal isOpen={!!cell} onRequestClose={close} contentLabel="Collapsing menu" shouldCloseOnEsc>
 			{cell && (
-				<FadeIn>
+				<>
 					<h2>Cell Id: {cell.id}</h2>
 					<button onClick={close}>close</button>
 					<div>Has collapsed: {cell.hasCollapsed ? "Yes" : "No"}</div>
@@ -19,7 +18,7 @@ const CollapseMenu = () => {
 					{Array.from(cell.possibleStates.values()).map((v) => {
 						return <button onClick={() => collapse(cell, v)}>{v}</button>;
 					})}
-				</FadeIn>
+				</>
 			)}
 		</Modal>
 	);
