@@ -1,13 +1,22 @@
 import Modal from "react-modal";
 import { useCollapseMenu } from "../../hooks/useCollapseMenu";
 import { useBoard } from "../../hooks/useBoard";
+import "./collapseMenuModal.css";
 
 const CollapseMenu = () => {
 	const { selectedCell: cell, close } = useCollapseMenu();
 	const { collapse } = useBoard();
 
 	return (
-		<Modal isOpen={!!cell} onRequestClose={close} contentLabel="Collapsing menu" shouldCloseOnEsc>
+		<Modal
+			// TODO REMOVE REACT MODAL
+			isOpen={!!cell}
+			onRequestClose={close}
+			contentLabel="Collapsing menu"
+			shouldCloseOnEsc
+			className="Modal"
+			overlayClassName="Overlay"
+		>
 			{cell && (
 				<>
 					<h2>Cell Id: {cell.id}</h2>
