@@ -1,0 +1,1 @@
+export type ReadonlyArray4D<T> = ReadonlyArray<ReadonlyArray<ReadonlyArray<ReadonlyArray<T>>>>
