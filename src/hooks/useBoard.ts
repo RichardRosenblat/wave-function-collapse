@@ -1,31 +1,25 @@
 import { useRecoilState } from "recoil";
 import { boardState } from "../states/boardState";
-import { defaultBoard } from "../util/defaultBoard";
+import { getDefaultBoard } from "../util/defaultBoard";
 import { cell } from "../types/cell";
 import { ReadonlyArray4D } from "../types/4dArray";
+import { collapseCell } from "../logic/waveFunctionColapser";
 
 export const useBoard = () => {
 	const [board, setBoard] = useRecoilState(boardState);
 
-	const collapse = (cell: cell, result: number) => {
+	const collapse = (cell: cell, into: number) => {
 		const { id } = cell;
 		const mBoard = getMutableBoard(board);
-		const [Y, X, y, x] = getCellCoordinates(id);
+		const cellCoords = getCellCoordinates(id);
 
 		// TODO update cells on board after collapsing
-		mBoard[Y][X][y][x] = {
-			...cell,
-			hasCollapsed: true,
-			possibleStates: new Set([result]),
-		};
-
-		updateBoardPossibleStates([Y, X, y, x], result, mBoard);
-
+		collapseCell(cellCoords, into, mBoard);
 		setBoard(mBoard);
 	};
 	const collapseAll = () => {};
 	const restoreAll = () => {
-		setBoard(defaultBoard);
+		setBoard(getDefaultBoard());
 	};
 	const restore = ({ id }: cell) => {
 		const mBoard = getMutableBoard(board);
@@ -33,7 +27,9 @@ export const useBoard = () => {
 
 		mBoard[Y][X][y][x] = {
 			// TODO possible states need to be recalculated
-			...defaultBoard[Y][X][y][x],
+			id,
+			hasCollapsed: false,
+			possibleStates: new Set([1, 2, 3, 4, 5, 6, 7, 8, 9]),
 		};
 
 		setBoard(mBoard);
@@ -49,25 +45,5 @@ export const useBoard = () => {
 		const xValue = ["l", "m", "r"];
 
 		return [yValue.indexOf(id[0]), xValue.indexOf(id[1]), yValue.indexOf(id[3]), xValue.indexOf(id[4])];
-	}
-	function updateBoardPossibleStates(collapsedCellCoords: number[], valueCollapsedInto: number, board: cell[][][][]) {
-		const [Y, X, y, x] = collapsedCellCoords;
-		const cellArea = board[Y][X];
-
-		updateAreaStates();
-		
-		
-
-		function updateAreaStates() {
-			cellArea.forEach((row, rowIndex) => {
-				row.forEach((_, columnIndex) => {
-					const isCollapsedCell = rowIndex === y && columnIndex === x;
-					if (!isCollapsedCell) {
-						const currentCell = board[Y][X][rowIndex][columnIndex];
-						currentCell.possibleStates.delete(valueCollapsedInto);
-					}
-				});
-			});
-		}
 	}
 };

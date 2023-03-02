@@ -2,7 +2,7 @@ import { cell } from "../types/cell";
 import { boardify } from "./boardify";
 import { idGenerator } from "./cellIdGenerator";
 
-function getDefaultBoard() {
+export function getDefaultBoard() {
 	const values1D: cell[] = [];
 
 	for (let i = 0; i < 81; i++) {
@@ -15,4 +15,3 @@ function getDefaultBoard() {
 
 	return boardify(values1D);
 }
-export const defaultBoard = getDefaultBoard();
