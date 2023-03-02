@@ -6,20 +6,32 @@ import Box from "@mui/material/Box";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import { Button, DialogActions, DialogContent, DialogContentText } from "@material-ui/core";
+import { cell } from "../../types/cell";
 
 const CollapseMenu = () => {
-	const { selectedCell: cell, close } = useCollapseMenu();
+	const { selectedCell, close } = useCollapseMenu();
 	const { collapse, restore } = useBoard();
 
-	const cellStates = cell && Array.from(cell.possibleStates.values());
+	const cellStates = selectedCell && Array.from(selectedCell.possibleStates.values());
+
+	const onClickCollapse = (v: number) => {
+		collapse(selectedCell as cell, v);
+		close();
+	};
+
+	function onClickRevert() {
+		restore(selectedCell as cell);
+		close();
+	}
+
 	return (
-		<Dialog open={!!cell} onClose={close} maxWidth={"xs"}>
-			{cell && (
+		<Dialog open={!!selectedCell} onClose={close} maxWidth={"xs"}>
+			{selectedCell && (
 				<>
 					<DialogTitle sx={{ paddingBottom: "5px" }}>
 						<Box display="flex" alignItems="center" justifyContent="space-between">
 							<Box>
-								<b> Cell Id: {cell.id}</b>
+								<b> Cell Id: {selectedCell.id}</b>
 							</Box>
 							<Box>
 								<IconButton onClick={close}>
@@ -30,16 +42,16 @@ const CollapseMenu = () => {
 					</DialogTitle>
 					<DialogContent>
 						<DialogContentText>
-							<span>Has collapsed: {cell.hasCollapsed ? "Yes" : "No"}</span>
+							<span>Has collapsed: {selectedCell.hasCollapsed ? "Yes" : "No"}</span>
 							<br />
 							<Box component={"span"} sx={{ fontSize: "h6.fontSize", fontWeight: "bold" }}>
-								{cell.hasCollapsed ? "Has Collapsed" : "Collapse"} into:{" "}
-								{cell.hasCollapsed && cellStates?.[0]}
+								{selectedCell.hasCollapsed ? "Has Collapsed" : "Collapse"} into:{" "}
+								{selectedCell.hasCollapsed && cellStates?.[0]}
 							</Box>
 						</DialogContentText>
 						<DialogActions style={{ justifyContent: "center" }}>
-							{cell.hasCollapsed ? (
-								<Button onClick={() => restore(cell)} variant="outlined">
+							{selectedCell.hasCollapsed ? (
+								<Button onClick={() => onClickRevert()} variant="outlined">
 									revert
 								</Button>
 							) : (
@@ -52,7 +64,7 @@ const CollapseMenu = () => {
 								>
 									{cellStates?.map((v, i) => {
 										return (
-											<Button key={i} onClick={() => collapse(cell, v)} variant="outlined">
+											<Button key={i} onClick={() => onClickCollapse(v)} variant="outlined">
 												{v}
 											</Button>
 										);

@@ -1,0 +1,1 @@
+export type cellNumericCoordinates = `${number}${number}${number}${number}`;
