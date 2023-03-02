@@ -18,6 +18,9 @@ export const useBoard = () => {
 			hasCollapsed: true,
 			possibleStates: new Set([result]),
 		};
+
+		updateBoardPossibleStates([Y, X, y, x], result, mBoard);
+
 		setBoard(mBoard);
 	};
 	const collapseAll = () => {};
@@ -37,14 +40,34 @@ export const useBoard = () => {
 	};
 
 	return { board: board as ReadonlyArray4D<cell>, collapse, restore, collapseAll, restoreAll };
+
+	function getMutableBoard(board: cell[][][][]) {
+		return board.map((e) => e.map((e) => e.map((e) => e.map((e) => e))));
+	}
+	function getCellCoordinates(id: string) {
+		const yValue = ["t", "c", "b"];
+		const xValue = ["l", "m", "r"];
+
+		return [yValue.indexOf(id[0]), xValue.indexOf(id[1]), yValue.indexOf(id[3]), xValue.indexOf(id[4])];
+	}
+	function updateBoardPossibleStates(collapsedCellCoords: number[], valueCollapsedInto: number, board: cell[][][][]) {
+		const [Y, X, y, x] = collapsedCellCoords;
+		const cellArea = board[Y][X];
+
+		updateAreaStates();
+		
+		
+
+		function updateAreaStates() {
+			cellArea.forEach((row, rowIndex) => {
+				row.forEach((_, columnIndex) => {
+					const isCollapsedCell = rowIndex === y && columnIndex === x;
+					if (!isCollapsedCell) {
+						const currentCell = board[Y][X][rowIndex][columnIndex];
+						currentCell.possibleStates.delete(valueCollapsedInto);
+					}
+				});
+			});
+		}
+	}
 };
-
-function getMutableBoard(board: cell[][][][]) {
-	return board.map((e) => e.map((e) => e.map((e) => e.map((e) => e))));
-}
-function getCellCoordinates(id: string) {
-	const yValue = ["t", "c", "b"];
-	const xValue = ["l", "m", "r"];
-
-	return [yValue.indexOf(id[0]), xValue.indexOf(id[1]), yValue.indexOf(id[3]), xValue.indexOf(id[4])];
-}
