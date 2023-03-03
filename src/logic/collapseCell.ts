@@ -23,10 +23,8 @@ function updateBoardPossibleStates(collapsedCoords: number[], valueCollapsedInto
 		const cellArea = board[Y][X];
 
 		cellArea.forEach((row, cellY) => {
-			row.forEach((currentCell, cellX) => {
-				if (!currentCell.hasCollapsed) {
-					removeStateOrCollapse([Y, X, cellY, cellX]);
-				}
+			row.forEach((_, cellX) => {
+				removeStateOrCollapse([Y, X, cellY, cellX]);
 			});
 		});
 	}

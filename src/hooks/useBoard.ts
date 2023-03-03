@@ -3,7 +3,7 @@ import { boardState } from "../states/boardState";
 import { getDefaultBoard } from "../util/defaultBoard";
 import { cell } from "../types/cell";
 import { ReadonlyArray4D } from "../types/4dArray";
-import { collapseCell } from "../logic/waveFunctionColapser";
+import { collapseCell } from "../logic/collapseCell";
 
 export const useBoard = () => {
 	const [board, setBoard] = useRecoilState(boardState);
