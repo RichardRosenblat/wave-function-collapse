@@ -4,6 +4,7 @@ import { getDefaultBoard } from "../util/defaultBoard";
 import { cell } from "../types/cell";
 import { ReadonlyArray4D } from "../types/4dArray";
 import { collapseCell } from "../logic/collapseCell";
+import { calculateCellStates } from "../logic/calculateStates";
 
 export const useBoard = () => {
 	const [board, setBoard] = useRecoilState(boardState);
@@ -20,15 +21,16 @@ export const useBoard = () => {
 	const restoreAll = () => {
 		setBoard(getDefaultBoard());
 	};
-	const restore = ({ id }: cell) => {
+	const restore = ({ id, possibleStates }: cell) => {
 		const mBoard = getMutableBoard(board);
 		const [Y, X, y, x] = getCellCoordinates(id);
+		const previousCellState = Array.from(possibleStates)[0];
 
 		mBoard[Y][X][y][x] = {
-			// TODO possible states need to be recalculated
 			id,
 			hasCollapsed: false,
-			possibleStates: new Set([1, 2, 3, 4, 5, 6, 7, 8, 9]),
+			// TODO algorithm needs to be reviewed
+			possibleStates: calculateCellStates([Y, X, y, x], previousCellState, mBoard),
 		};
 
 		setBoard(mBoard);
