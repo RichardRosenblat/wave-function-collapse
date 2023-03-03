@@ -14,7 +14,7 @@ const CollapseMenu = () => {
 
 	const cellStates = selectedCell && Array.from(selectedCell.possibleStates.values());
 
-	const onClickCollapse = (v: number) => {
+	const handleClickToCollapse = (v: number) => {
 		collapse(selectedCell as cell, v);
 		close();
 	};
@@ -24,8 +24,15 @@ const CollapseMenu = () => {
 		close();
 	}
 
+	const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
+		if (!selectedCell?.hasCollapsed && cellStates?.includes(+e.key)) {
+			e.preventDefault();
+			handleClickToCollapse(+e.key);
+		}
+	};
+
 	return (
-		<Dialog open={!!selectedCell} onClose={close} maxWidth={"xs"}>
+		<Dialog open={!!selectedCell} onClose={close} maxWidth={"xs"} onKeyDown={handleKeyPress}>
 			{selectedCell && (
 				<>
 					<DialogTitle sx={{ paddingBottom: "5px" }}>
@@ -64,7 +71,7 @@ const CollapseMenu = () => {
 								>
 									{cellStates?.map((v, i) => {
 										return (
-											<Button key={i} onClick={() => onClickCollapse(v)} variant="outlined">
+											<Button key={i} onClick={() => handleClickToCollapse(v)} variant="outlined">
 												{v}
 											</Button>
 										);
