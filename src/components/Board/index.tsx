@@ -4,9 +4,12 @@ import SquaresArea from "../SquaresArea";
 import Styles from "./Board.module.scss";
 import CollapseMenu from "../CollapseMenu";
 import { useBoard } from "../../hooks/useBoard";
+import { Button } from "@mui/material";
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
+import SendIcon from "@mui/icons-material/Send";
 
 const Board = () => {
-	const { board } = useBoard();
+	const { board, restoreAll } = useBoard();
 
 	return (
 		<section className={Styles.container}>
@@ -28,6 +31,14 @@ const Board = () => {
 					</div>
 				);
 			})}
+			<div className={Styles["button-container"]}>
+				<Button variant="contained" onClick={restoreAll} startIcon={<RestartAltIcon />}>
+					Reset
+				</Button>
+				<Button variant="contained" sx={{ marginLeft: "10px" }} endIcon={<SendIcon />}>
+					Start solving
+				</Button>
+			</div>
 			<CollapseMenu />
 		</section>
 	);

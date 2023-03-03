@@ -13,7 +13,6 @@ export const useBoard = () => {
 		const mBoard = getMutableBoard(board);
 		const cellCoords = getCellCoordinates(id);
 
-		// TODO update cells on board after collapsing
 		collapseCell(cellCoords, into, mBoard);
 		setBoard(mBoard);
 	};

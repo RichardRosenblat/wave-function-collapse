@@ -5,5 +5,15 @@
 }
 
 .container {
-	margin-top: 10px;
+	margin-top: 5%;
+	text-align: center;
+}
+.button-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	width: fit-content;
+	padding-top: 10px;
+	padding-left: 41%;
 }
