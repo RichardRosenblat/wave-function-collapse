@@ -12,7 +12,7 @@ const CollapseMenu = () => {
 	const { selectedCell, close } = useCollapseMenu();
 	const { collapse, restore } = useBoard();
 
-	const cellStates = selectedCell && Array.from(selectedCell.possibleStates.values());
+	const cellStates = selectedCell && Array.from(selectedCell.possibleStates.values()).sort();
 
 	const handleClickToCollapse = (v: number) => {
 		collapse(selectedCell as cell, v);

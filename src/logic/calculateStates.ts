@@ -1,5 +1,5 @@
 import { cell } from "../types/cell";
-import { differenceOf } from "../util/diferenceOf";
+import { differenceOf } from "../util/differenceOf";
 import { unionOf } from "../util/unionOf";
 
 export function calculateCellStates(collapsedCoords: number[], revertedCellState: number, board: cell[][][][]) {
