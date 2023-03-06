@@ -29,7 +29,6 @@ export const useBoard = () => {
 		mBoard[Y][X][y][x] = {
 			id,
 			hasCollapsed: false,
-			// TODO algorithm needs to be reviewed
 			possibleStates: calculateCellStates([Y, X, y, x], previousCellState, mBoard),
 		};
 

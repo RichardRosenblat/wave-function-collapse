@@ -14,7 +14,9 @@ function getSurroundingCellsStates(collapsedCoords: number[], revertedCellState:
 	const [Y, X, y, x] = collapsedCoords;
 
 	const areaRestrinctingStates = checkAreaStates();
+	
 	const horizontalRestrinctingStates = checkLineStates("horizontal");
+
 	const verticalRestrictingStates = checkLineStates("vertical");
 
 	return unionOf(areaRestrinctingStates, horizontalRestrinctingStates, verticalRestrictingStates);
@@ -24,7 +26,10 @@ function getSurroundingCellsStates(collapsedCoords: number[], revertedCellState:
 		const areaStates = new Set<number>();
 
 		cellArea.forEach((row, cellY) => {
-			row.forEach((_, cellX) => {
+			row.forEach((currentCell, cellX) => {
+				if (currentCell.id === board[Y][X][y][x].id) {
+					return;
+				}
 				const cellState = addOrGetState([Y, X, cellY, cellX]);
 				if (cellState instanceof Set) {
 					return;
@@ -67,7 +72,7 @@ function getSurroundingCellsStates(collapsedCoords: number[], revertedCellState:
 		const [Y, X, y, x] = coordsToCheck;
 		const currentCell = board[Y][X][y][x];
 
-		if (!currentCell.hasCollapsed) {
+		if (currentCell.hasCollapsed) {
 			const currentCellState = Array.from(currentCell.possibleStates.values())[0];
 			return currentCellState;
 		}
