@@ -17,7 +17,7 @@ export const useBoard = () => {
 		collapseCell(cellCoords, into, mBoard);
 		setBoard(mBoard);
 	};
-	const collapseAll = () => {};
+	const collapseNext = () => {};
 	const restoreAll = () => {
 		setBoard(getDefaultBoard());
 	};
@@ -35,7 +35,7 @@ export const useBoard = () => {
 		setBoard(mBoard);
 	};
 
-	return { board: board as ReadonlyArray4D<cell>, collapse, restore, collapseAll, restoreAll };
+	return { board: board as ReadonlyArray4D<cell>, collapse, restore, collapseNext, restoreAll };
 
 	function getMutableBoard(board: cell[][][][]) {
 		return board.map((e) => e.map((e) => e.map((e) => e.map((e) => e))));

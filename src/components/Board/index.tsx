@@ -7,9 +7,24 @@ import { useBoard } from "../../hooks/useBoard";
 import { Button } from "@mui/material";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import SendIcon from "@mui/icons-material/Send";
+import StopIcon from '@mui/icons-material/Stop';
+import { useEffect, useState } from "react";
 
 const Board = () => {
-	const { board, restoreAll } = useBoard();
+	const { board, restoreAll, collapseNext } = useBoard();
+	const [isSolving, setIsSolving] = useState(false)
+
+
+	let timer: NodeJS.Timeout
+
+	function start() {
+		return setTimeout(() => {
+			console.log('a')
+		}, 1000);
+	}
+	function stopInterval() {
+		clearInterval(timer);
+	}
 
 	return (
 		<section className={Styles.container}>
@@ -35,8 +50,14 @@ const Board = () => {
 				<Button variant="contained" onClick={restoreAll} startIcon={<RestartAltIcon />}>
 					Reset
 				</Button>
-				<Button variant="contained" sx={{ marginLeft: "10px" }} endIcon={<SendIcon />}>
-					Start solving
+				<Button
+					variant="contained"
+					onClick={() => setIsSolving(!isSolving)}
+					sx={{ marginLeft: "10px" }}
+					endIcon={isSolving ? <StopIcon /> : <SendIcon />}
+					color={isSolving ? "error" : "primary"}
+				>
+					{isSolving ? 'Stop' : 'Start'} solving
 				</Button>
 			</div>
 			<CollapseMenu />
