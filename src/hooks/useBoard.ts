@@ -17,7 +17,9 @@ export const useBoard = () => {
 		collapseCell(cellCoords, into, mBoard);
 		setBoard(mBoard);
 	};
-	const collapseNext = () => {};
+	const collapseNext = () => {
+		console.log('i have been called look at me!')
+	};
 	const restoreAll = () => {
 		setBoard(getDefaultBoard());
 	};

@@ -12,19 +12,29 @@ import { useEffect, useState } from "react";
 
 const Board = () => {
 	const { board, restoreAll, collapseNext } = useBoard();
-	const [isSolving, setIsSolving] = useState(false)
+	const [isSolving, setIsSolving] = useState(false);
+	const [intervalId, setIntervalId] = useState<NodeJS.Timer | undefined>(undefined);
 
 
-	let timer: NodeJS.Timeout
+	useEffect(() => {
+		if (isSolving) {
+			const id = setInterval(() => {
+				collapseNext();
+			}, 1000);
+			setIntervalId(id);
+		} else {
+			clearInterval(intervalId);
+			setIntervalId(undefined);
+		}
 
-	function start() {
-		return setTimeout(() => {
-			console.log('a')
-		}, 1000);
-	}
-	function stopInterval() {
-		clearInterval(timer);
-	}
+		// Cleanup function to stop interval when component unmounts or interval id changes
+		return () => clearInterval(intervalId);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isSolving]);
+
+	const handleSolvingClick = () => {
+		setIsSolving(prevState => !prevState);
+	};
 
 	return (
 		<section className={Styles.container}>
@@ -52,7 +62,7 @@ const Board = () => {
 				</Button>
 				<Button
 					variant="contained"
-					onClick={() => setIsSolving(!isSolving)}
+					onClick={handleSolvingClick}
 					sx={{ marginLeft: "10px" }}
 					endIcon={isSolving ? <StopIcon /> : <SendIcon />}
 					color={isSolving ? "error" : "primary"}
