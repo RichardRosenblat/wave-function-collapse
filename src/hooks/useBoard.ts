@@ -5,6 +5,8 @@ import { cell } from "../types/cell";
 import { ReadonlyArray4D } from "../types/4dArray";
 import { collapseCell } from "../logic/collapseCell";
 import { calculateCellStates } from "../logic/calculateStates";
+import { collapseNextCell } from "../logic/collapseNextCell";
+import { getCellCoordinatesFromId } from "../util/getCellCoordinatesFromId";
 
 export const useBoard = () => {
 	const [board, setBoard] = useRecoilState(boardState);
@@ -12,20 +14,24 @@ export const useBoard = () => {
 	const collapse = (cell: cell, into: number) => {
 		const { id } = cell;
 		const mBoard = getMutableBoard(board);
-		const cellCoords = getCellCoordinates(id);
+		const cellCoords = getCellCoordinatesFromId(id);
 
 		collapseCell(cellCoords, into, mBoard);
 		setBoard(mBoard);
 	};
 	const collapseNext = () => {
-		console.log('i have been called look at me!')
+		const mBoard = getMutableBoard(board);
+		const hasCollapsedACell = collapseNextCell(mBoard);
+		setBoard(mBoard);
+
+		return hasCollapsedACell;
 	};
 	const restoreAll = () => {
 		setBoard(getDefaultBoard());
 	};
 	const restore = ({ id, possibleStates }: cell) => {
 		const mBoard = getMutableBoard(board);
-		const [Y, X, y, x] = getCellCoordinates(id);
+		const [Y, X, y, x] = getCellCoordinatesFromId(id);
 		const previousCellState = Array.from(possibleStates)[0];
 
 		mBoard[Y][X][y][x] = {
@@ -42,10 +48,5 @@ export const useBoard = () => {
 	function getMutableBoard(board: cell[][][][]) {
 		return board.map((e) => e.map((e) => e.map((e) => e.map((e) => e))));
 	}
-	function getCellCoordinates(id: string) {
-		const yValue = ["t", "c", "b"];
-		const xValue = ["l", "m", "r"];
-
-		return [yValue.indexOf(id[0]), xValue.indexOf(id[1]), yValue.indexOf(id[3]), xValue.indexOf(id[4])];
-	}
 };
+

@@ -15,26 +15,30 @@ const Board = () => {
 	const [isSolving, setIsSolving] = useState(false);
 	const [intervalId, setIntervalId] = useState<NodeJS.Timer | undefined>(undefined);
 
-
+	const handleSolvingClick = () => {
+		setIsSolving(prevState => !prevState);
+	};
+	// TODO THERES SOMETHING WEIRD GOING ON HELP
 	useEffect(() => {
 		if (isSolving) {
 			const id = setInterval(() => {
-				collapseNext();
-			}, 1000);
+				const hasCollapsedACell = collapseNext();
+				if (!hasCollapsedACell) {
+					handleSolvingClick()
+					alert('There are no more cells left to collapse')
+				}
+			}, 100);
 			setIntervalId(id);
 		} else {
 			clearInterval(intervalId);
 			setIntervalId(undefined);
 		}
 
-		// Cleanup function to stop interval when component unmounts or interval id changes
 		return () => clearInterval(intervalId);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isSolving]);
 
-	const handleSolvingClick = () => {
-		setIsSolving(prevState => !prevState);
-	};
+
 
 	return (
 		<section className={Styles.container}>
