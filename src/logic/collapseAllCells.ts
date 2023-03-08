@@ -3,26 +3,22 @@ import { getCellCoordinatesFromId } from "../util/getCellCoordinatesFromId";
 import { randomFrom } from "../util/randomFrom";
 import { collapseCell } from "./collapseCell";
 
-export function collapseNextCell(board: cell[][][][]): boolean {
-	const cellsWithLessEntropy = findCellsWithLessEntropy();
+export function collapseAllCells(board: cell[][][][]): number[] {
+	const cellsWithLessEntropy = findCellsWithLessEntropy(board);
 
 	if (cellsWithLessEntropy.length === 0) {
-		return false;
+		return [];
 	}
 
 	const randomCell = randomFrom(cellsWithLessEntropy);
 	const [Y, X, y, x] = getCellCoordinatesFromId(randomCell.id);
 	const randomState = randomFrom(randomCell.possibleStates);
 
-
-	console.log("before collapse:");
-	console.log(board[Y][X][y][x].hasCollapsed);
 	collapseCell([Y, X, y, x], randomState, board);
-	console.log("after collapse:");
-	console.log(board[Y][X][y][x].hasCollapsed);
-	return true;
 
-	function findCellsWithLessEntropy() {
+	return [Y, X, y, x];
+
+	function findCellsWithLessEntropy(board: cell[][][][]) {
 		return board.flat(3).reduce((cells: cell[], cell: cell) => {
 			if (cell.hasCollapsed) {
 				return cells;

@@ -5,7 +5,7 @@ import { cell } from "../types/cell";
 import { ReadonlyArray4D } from "../types/4dArray";
 import { collapseCell } from "../logic/collapseCell";
 import { calculateCellStates } from "../logic/calculateStates";
-import { collapseNextCell } from "../logic/collapseNextCell";
+import { collapseAllCells } from "../logic/collapseAllCells";
 import { getCellCoordinatesFromId } from "../util/getCellCoordinatesFromId";
 
 export const useBoard = () => {
@@ -19,12 +19,10 @@ export const useBoard = () => {
 		collapseCell(cellCoords, into, mBoard);
 		setBoard(mBoard);
 	};
-	const collapseNext = () => {
+	const collapseAll = () => {
 		const mBoard = getMutableBoard(board);
-		const hasCollapsedACell = collapseNextCell(mBoard);
+		collapseAllCells(mBoard);
 		setBoard(mBoard);
-
-		return hasCollapsedACell;
 	};
 	const restoreAll = () => {
 		setBoard(getDefaultBoard());
@@ -43,7 +41,7 @@ export const useBoard = () => {
 		setBoard(mBoard);
 	};
 
-	return { board: board as ReadonlyArray4D<cell>, collapse, restore, collapseNext, restoreAll };
+	return { board: board as ReadonlyArray4D<cell>, collapse, restore, collapseAll, restoreAll };
 
 	function getMutableBoard(board: cell[][][][]) {
 		return board.map((e) => e.map((e) => e.map((e) => e.map((e) => e))));

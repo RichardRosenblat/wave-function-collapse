@@ -7,38 +7,15 @@ import { useBoard } from "../../hooks/useBoard";
 import { Button } from "@mui/material";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import SendIcon from "@mui/icons-material/Send";
-import StopIcon from '@mui/icons-material/Stop';
-import { useEffect, useState } from "react";
 
 const Board = () => {
-	const { board, restoreAll, collapseNext } = useBoard();
-	const [isSolving, setIsSolving] = useState(false);
-	const [intervalId, setIntervalId] = useState<NodeJS.Timer | undefined>(undefined);
+	const { board, restoreAll, collapseAll } = useBoard();
+	
 
 	const handleSolvingClick = () => {
-		setIsSolving(prevState => !prevState);
+		collapseAll()
 	};
-	// TODO THERES SOMETHING WEIRD GOING ON HELP
-	useEffect(() => {
-		if (isSolving) {
-			// collapseNext();
-			// handleSolvingClick()
-			const id = setInterval(() => {
-				const hasCollapsedACell = collapseNext();
-				if (!hasCollapsedACell) {
-					handleSolvingClick()
-					alert('There are no more cells left to collapse')
-				}
-			}, 1000);
-			setIntervalId(id);
-		} else {
-			clearInterval(intervalId);
-			setIntervalId(undefined);
-		}
 
-		return () => clearInterval(intervalId);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isSolving]);
 
 
 
@@ -70,10 +47,10 @@ const Board = () => {
 					variant="contained"
 					onClick={handleSolvingClick}
 					sx={{ marginLeft: "10px" }}
-					endIcon={isSolving ? <StopIcon /> : <SendIcon />}
-					color={isSolving ? "error" : "primary"}
+					endIcon={ <SendIcon />}
+					color={"primary"}
 				>
-					{isSolving ? 'Stop' : 'Start'} solving
+					Solve All Cells
 				</Button>
 			</div>
 			<CollapseMenu />
