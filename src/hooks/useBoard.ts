@@ -49,4 +49,3 @@ export const useBoard = () => {
 		return board.map((e) => e.map((e) => e.map((e) => e.map((e) => e))));
 	}
 };
-

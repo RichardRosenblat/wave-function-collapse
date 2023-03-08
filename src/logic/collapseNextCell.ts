@@ -11,11 +11,15 @@ export function collapseNextCell(board: cell[][][][]): boolean {
 	}
 
 	const randomCell = randomFrom(cellsWithLessEntropy);
-	const selectedCellsCoordinates = getCellCoordinatesFromId(randomCell.id);
+	const [Y, X, y, x] = getCellCoordinatesFromId(randomCell.id);
 	const randomState = randomFrom(randomCell.possibleStates);
 
-	collapseCell(selectedCellsCoordinates, randomState, board);
 
+	console.log("before collapse:");
+	console.log(board[Y][X][y][x].hasCollapsed);
+	collapseCell([Y, X, y, x], randomState, board);
+	console.log("after collapse:");
+	console.log(board[Y][X][y][x].hasCollapsed);
 	return true;
 
 	function findCellsWithLessEntropy() {

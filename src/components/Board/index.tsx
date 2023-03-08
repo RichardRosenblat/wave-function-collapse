@@ -21,13 +21,15 @@ const Board = () => {
 	// TODO THERES SOMETHING WEIRD GOING ON HELP
 	useEffect(() => {
 		if (isSolving) {
+			// collapseNext();
+			// handleSolvingClick()
 			const id = setInterval(() => {
 				const hasCollapsedACell = collapseNext();
 				if (!hasCollapsedACell) {
 					handleSolvingClick()
 					alert('There are no more cells left to collapse')
 				}
-			}, 100);
+			}, 1000);
 			setIntervalId(id);
 		} else {
 			clearInterval(intervalId);
