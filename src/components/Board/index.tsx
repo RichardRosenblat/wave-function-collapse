@@ -7,15 +7,18 @@ import { useBoard } from "../../hooks/useBoard";
 import { Button } from "@mui/material";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import SendIcon from "@mui/icons-material/Send";
-
+import DeleteIcon from '@mui/icons-material/Delete';
 const Board = () => {
-	const { board, restoreAll, collapseAll } = useBoard();
+	const { board, restoreAll, collapseAll, startCollapsing, stopCollapsing } = useBoard();
 
 	const handleSolveAllClick = () => {
 		collapseAll()
 	};
 	const handleStartClick = () => {
-		collapseAll()
+		startCollapsing()
+	};
+	const handleStopClick = () => {
+		stopCollapsing()
 	};
 
 	return (
@@ -60,6 +63,15 @@ const Board = () => {
 				color={"primary"}
 			>
 				Start solving next Cells
+			</Button>
+			<Button
+				variant="contained"
+				onClick={handleStopClick}
+				sx={{ marginTop: "10px", marginLeft: "10px" }}
+				endIcon={<DeleteIcon />}
+				color={"error"}
+			>
+				Stop solving next Cells
 			</Button>
 			<CollapseMenu />
 		</section>

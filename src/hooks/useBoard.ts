@@ -29,16 +29,19 @@ export const useBoard = () => {
 		}
 		setBoard(mBoard);
 	};
+
+	let intervalId: NodeJS.Timer | undefined = undefined;
 	const startCollapsing = () => {
-		const mBoard = getMutableBoard(board);
-		
-		setBoard(mBoard);
+		intervalId = setInterval(() => {
+			const mBoard = getMutableBoard(board);
+			collapseNextCell(mBoard);
+			setBoard(mBoard);
+		}, 1000);
 	};
 	const stopCollapsing = () => {
-		const mBoard = getMutableBoard(board);
-		
-		setBoard(mBoard);
+		clearInterval(intervalId);
 	};
+	
 	const restoreAll = () => {
 		setBoard(getDefaultBoard());
 	};
@@ -56,7 +59,15 @@ export const useBoard = () => {
 		setBoard(mBoard);
 	};
 
-	return { board: board as ReadonlyArray4D<cell>, collapse, restore, collapseAll, restoreAll };
+	return {
+		board: board as ReadonlyArray4D<cell>,
+		collapse,
+		restore,
+		collapseAll,
+		startCollapsing,
+		stopCollapsing,
+		restoreAll,
+	};
 
 	function getMutableBoard(board: cell[][][][]) {
 		return board.map((e) => e.map((e) => e.map((e) => e.map((e) => e))));
