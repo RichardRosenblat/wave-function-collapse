@@ -11,7 +11,10 @@ import SendIcon from "@mui/icons-material/Send";
 const Board = () => {
 	const { board, restoreAll, collapseAll } = useBoard();
 
-	const handleSolvingClick = () => {
+	const handleSolveAllClick = () => {
+		collapseAll()
+	};
+	const handleStartClick = () => {
 		collapseAll()
 	};
 
@@ -41,7 +44,7 @@ const Board = () => {
 				</Button>
 				<Button
 					variant="contained"
-					onClick={handleSolvingClick}
+					onClick={handleSolveAllClick}
 					sx={{ marginLeft: "10px" }}
 					endIcon={<SendIcon />}
 					color={"primary"}
@@ -49,6 +52,15 @@ const Board = () => {
 					Solve All Cells
 				</Button>
 			</div>
+			<Button
+				variant="contained"
+				onClick={handleStartClick}
+				sx={{ marginTop: "10px" }}
+				endIcon={<SendIcon />}
+				color={"primary"}
+			>
+				Start solving next Cells
+			</Button>
 			<CollapseMenu />
 		</section>
 	);

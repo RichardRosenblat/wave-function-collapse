@@ -5,7 +5,7 @@ import { cell } from "../types/cell";
 import { ReadonlyArray4D } from "../types/4dArray";
 import { collapseCell } from "../logic/collapseCell";
 import { calculateCellStates } from "../logic/calculateStates";
-import { collapseAllCells } from "../logic/collapseAllCells";
+import { collapseNextCell } from "../logic/collapseAllCells";
 import { getCellCoordinatesFromId } from "../util/getCellCoordinatesFromId";
 
 export const useBoard = () => {
@@ -21,7 +21,22 @@ export const useBoard = () => {
 	};
 	const collapseAll = () => {
 		const mBoard = getMutableBoard(board);
-		collapseAllCells(mBoard);
+		while (true) {
+			const wasACellCollapsed = collapseNextCell(mBoard);
+			if (!wasACellCollapsed) {
+				break;
+			}
+		}
+		setBoard(mBoard);
+	};
+	const startCollapsing = () => {
+		const mBoard = getMutableBoard(board);
+		
+		setBoard(mBoard);
+	};
+	const stopCollapsing = () => {
+		const mBoard = getMutableBoard(board);
+		
 		setBoard(mBoard);
 	};
 	const restoreAll = () => {
