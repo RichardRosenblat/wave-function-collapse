@@ -10,14 +10,10 @@ import SendIcon from "@mui/icons-material/Send";
 
 const Board = () => {
 	const { board, restoreAll, collapseAll } = useBoard();
-	
 
 	const handleSolvingClick = () => {
 		collapseAll()
 	};
-
-
-
 
 	return (
 		<section className={Styles.container}>
@@ -47,7 +43,7 @@ const Board = () => {
 					variant="contained"
 					onClick={handleSolvingClick}
 					sx={{ marginLeft: "10px" }}
-					endIcon={ <SendIcon />}
+					endIcon={<SendIcon />}
 					color={"primary"}
 				>
 					Solve All Cells

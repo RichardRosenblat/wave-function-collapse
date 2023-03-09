@@ -3,29 +3,24 @@ import { getCellCoordinatesFromId } from "../util/getCellCoordinatesFromId";
 import { randomFrom } from "../util/randomFrom";
 import { collapseCell } from "./collapseCell";
 
-let generator: Generator<number[], number[] | undefined, unknown>;
-let cellsWithLessEntropy: cell[];
-
 export function collapseAllCells(board: cell[][][][]) {
-	cellsWithLessEntropy = findCellsWithLessEntropy(board);
-
-	if (!generator) {
-		generator = collapseNext();
+	while (true) {
+		const wasACellCollapsed = collapseNextCell();
+		if (!wasACellCollapsed) {
+			break;
+		}
 	}
 
-	return generator.next().value || [];
-
-	function* collapseNext() {
+	function collapseNextCell() {
+		const cellsWithLessEntropy = findCellsWithLessEntropy(board);
 		if (cellsWithLessEntropy.length === 0) {
-			return [] as number[];
+			return false;
 		}
 		const randomCell = randomFrom(cellsWithLessEntropy);
 		const [Y, X, y, x] = getCellCoordinatesFromId(randomCell.id);
 		const randomState = randomFrom(randomCell.possibleStates);
-
 		collapseCell([Y, X, y, x], randomState, board);
-
-		yield [Y, X, y, x];
+		return true;
 	}
 
 	function findCellsWithLessEntropy(board: cell[][][][]) {
