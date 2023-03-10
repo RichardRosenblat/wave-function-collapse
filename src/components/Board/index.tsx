@@ -7,19 +7,27 @@ import { useBoard } from "../../hooks/useBoard";
 import { Button } from "@mui/material";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import SendIcon from "@mui/icons-material/Send";
-import DeleteIcon from '@mui/icons-material/Delete';
+import { useState } from 'react'
+import DoneAllIcon from '@mui/icons-material/DoneAll';
+import StopIcon from '@mui/icons-material/Stop';
+
 const Board = () => {
 	const { board, restoreAll, collapseAll, startCollapsing, stopCollapsing } = useBoard();
+
+	const [isSolving, setIsSolving] = useState(false)
 
 	const handleSolveAllClick = () => {
 		collapseAll()
 	};
-	const handleStartClick = () => {
-		startCollapsing()
+	const toggleSolving = () => {
+		if (!isSolving) {
+			startCollapsing()
+		} else {
+			stopCollapsing()
+		}
+		setIsSolving(prev => !prev)
 	};
-	const handleStopClick = () => {
-		stopCollapsing()
-	};
+
 
 	return (
 		<section className={Styles.container}>
@@ -45,35 +53,28 @@ const Board = () => {
 				<Button variant="contained" onClick={restoreAll} startIcon={<RestartAltIcon />}>
 					Reset
 				</Button>
+
 				<Button
 					variant="contained"
-					onClick={handleSolveAllClick}
+					onClick={toggleSolving}
 					sx={{ marginLeft: "10px" }}
-					endIcon={<SendIcon />}
-					color={"primary"}
+					endIcon={isSolving ? <StopIcon /> : <SendIcon />}
+					color={isSolving ? 'error' : "primary"}
 				>
-					Solve All Cells
+					Start solving
 				</Button>
 			</div>
 			<Button
 				variant="contained"
-				onClick={handleStartClick}
+				onClick={handleSolveAllClick}
 				sx={{ marginTop: "10px" }}
-				endIcon={<SendIcon />}
-				color={"primary"}
+				endIcon={<DoneAllIcon />}
+				color={"success"}
 			>
-				Start solving next Cells
-			</Button>
-			<Button
-				variant="contained"
-				onClick={handleStopClick}
-				sx={{ marginTop: "10px", marginLeft: "10px" }}
-				endIcon={<DeleteIcon />}
-				color={"error"}
-			>
-				Stop solving next Cells
+				Solve All
 			</Button>
 			<CollapseMenu />
+
 		</section>
 	);
 };

@@ -8,6 +8,8 @@ import { calculateCellStates } from "../logic/calculateStates";
 import { collapseNextCell } from "../logic/collapseAllCells";
 import { getCellCoordinatesFromId } from "../util/getCellCoordinatesFromId";
 
+let intervalId: NodeJS.Timer | null = null;
+
 export const useBoard = () => {
 	const [board, setBoard] = useRecoilState(boardState);
 
@@ -30,18 +32,22 @@ export const useBoard = () => {
 		setBoard(mBoard);
 	};
 
-	let intervalId: NodeJS.Timer | undefined = undefined;
 	const startCollapsing = () => {
 		intervalId = setInterval(() => {
-			const mBoard = getMutableBoard(board);
-			collapseNextCell(mBoard);
-			setBoard(mBoard);
-		}, 1000);
+			setBoard((prev) => {
+				const mBoard = getMutableBoard(prev);
+				collapseNextCell(mBoard);
+				return mBoard;
+			});
+		}, 150);
 	};
 	const stopCollapsing = () => {
-		clearInterval(intervalId);
+		if (intervalId) {
+			clearInterval(intervalId);
+			intervalId = null;
+		}
 	};
-	
+
 	const restoreAll = () => {
 		setBoard(getDefaultBoard());
 	};
