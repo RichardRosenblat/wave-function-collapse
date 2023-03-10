@@ -5,13 +5,17 @@ import { collapseCell } from "./collapseCell";
 
 export function collapseNextCell(board: cell[][][][]) {
 	const cellsWithLessEntropy = findCellsWithLessEntropy(board);
+
 	if (cellsWithLessEntropy.length === 0) {
 		return false;
 	}
+
 	const randomCell = randomFrom(cellsWithLessEntropy);
 	const [Y, X, y, x] = getCellCoordinatesFromId(randomCell.id);
 	const randomState = randomFrom(randomCell.possibleStates);
+
 	collapseCell([Y, X, y, x], randomState, board);
+	
 	return true;
 }
 

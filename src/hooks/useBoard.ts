@@ -14,32 +14,42 @@ export const useBoard = () => {
 	const [board, setBoard] = useRecoilState(boardState);
 
 	const collapse = (cell: cell, into: number) => {
-		const { id } = cell;
-		const mBoard = getMutableBoard(board);
-		const cellCoords = getCellCoordinatesFromId(id);
+		setBoard((prev) => {
+			const { id } = cell;
+			const mBoard = getMutableBoard(prev);
+			const cellCoords = getCellCoordinatesFromId(id);
 
-		collapseCell(cellCoords, into, mBoard);
-		setBoard(mBoard);
+			collapseCell(cellCoords, into, mBoard);
+			return mBoard;
+		});
 	};
 	const collapseAll = () => {
-		const mBoard = getMutableBoard(board);
-		while (true) {
-			const wasACellCollapsed = collapseNextCell(mBoard);
-			if (!wasACellCollapsed) {
-				break;
+		setBoard((prev) => {
+			const mBoard = getMutableBoard(prev);
+			while (true) {
+				const wasACellCollapsed = collapseNextCell(mBoard);
+				if (!wasACellCollapsed) {
+					break;
+				}
 			}
-		}
-		setBoard(mBoard);
+			return mBoard;
+		});
 	};
 
-	const startCollapsing = () => {
-		intervalId = setInterval(() => {
-			setBoard((prev) => {
-				const mBoard = getMutableBoard(prev);
-				collapseNextCell(mBoard);
-				return mBoard;
-			});
-		}, 150);
+	const startCollapsing = (whenFinish: () => unknown) => {
+		if (!intervalId) {
+			intervalId = setInterval(() => {
+				setBoard((prev) => {
+					const mBoard = getMutableBoard(prev);
+					const hasACellCollapsed = collapseNextCell(mBoard);
+					if (hasACellCollapsed) {
+						stopCollapsing();
+						whenFinish();
+					}
+					return mBoard;
+				});
+			}, 200);
+		}
 	};
 	const stopCollapsing = () => {
 		if (intervalId) {
@@ -48,21 +58,23 @@ export const useBoard = () => {
 		}
 	};
 
+	const restore = ({ id, possibleStates }: cell) => {
+		setBoard((prev) => {
+			const mBoard = getMutableBoard(prev);
+			const [Y, X, y, x] = getCellCoordinatesFromId(id);
+			const previousCellState = Array.from(possibleStates)[0];
+
+			mBoard[Y][X][y][x] = {
+				id,
+				hasCollapsed: false,
+				possibleStates: calculateCellStates([Y, X, y, x], previousCellState, mBoard),
+			};
+
+			return mBoard;
+		});
+	};
 	const restoreAll = () => {
 		setBoard(getDefaultBoard());
-	};
-	const restore = ({ id, possibleStates }: cell) => {
-		const mBoard = getMutableBoard(board);
-		const [Y, X, y, x] = getCellCoordinatesFromId(id);
-		const previousCellState = Array.from(possibleStates)[0];
-
-		mBoard[Y][X][y][x] = {
-			id,
-			hasCollapsed: false,
-			possibleStates: calculateCellStates([Y, X, y, x], previousCellState, mBoard),
-		};
-
-		setBoard(mBoard);
 	};
 
 	return {
@@ -70,9 +82,9 @@ export const useBoard = () => {
 		collapse,
 		restore,
 		collapseAll,
+		restoreAll,
 		startCollapsing,
 		stopCollapsing,
-		restoreAll,
 	};
 
 	function getMutableBoard(board: cell[][][][]) {

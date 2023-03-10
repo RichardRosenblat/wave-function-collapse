@@ -21,7 +21,7 @@ const Board = () => {
 	};
 	const toggleSolving = () => {
 		if (!isSolving) {
-			startCollapsing()
+			startCollapsing(() => { alert('No more cells left to collapse'); stopCollapsing(); })
 		} else {
 			stopCollapsing()
 		}
