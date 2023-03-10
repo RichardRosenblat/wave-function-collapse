@@ -36,13 +36,13 @@ export const useBoard = () => {
 		});
 	};
 
-	const startCollapsing = (whenFinish: () => unknown) => {
+	const startCollapsing = (whenFinish: () => unknown = () => {}) => {
 		if (!intervalId) {
 			intervalId = setInterval(() => {
 				setBoard((prev) => {
 					const mBoard = getMutableBoard(prev);
 					const hasACellCollapsed = collapseNextCell(mBoard);
-					if (hasACellCollapsed) {
+					if (!hasACellCollapsed) {
 						stopCollapsing();
 						whenFinish();
 					}

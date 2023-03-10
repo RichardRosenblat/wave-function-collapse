@@ -7,7 +7,7 @@ import { useBoard } from "../../hooks/useBoard";
 import { Button } from "@mui/material";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import SendIcon from "@mui/icons-material/Send";
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import StopIcon from '@mui/icons-material/Stop';
 
@@ -16,15 +16,23 @@ const Board = () => {
 
 	const [isSolving, setIsSolving] = useState(false)
 
+	useEffect(() => {
+		if (isSolving) {
+			startCollapsing(() => {
+				alert('No more cells left to collapse');
+				toggleSolving()
+			})
+		} else {
+			stopCollapsing()
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isSolving])
+
+
 	const handleSolveAllClick = () => {
 		collapseAll()
 	};
 	const toggleSolving = () => {
-		if (!isSolving) {
-			startCollapsing(() => { alert('No more cells left to collapse'); stopCollapsing(); })
-		} else {
-			stopCollapsing()
-		}
 		setIsSolving(prev => !prev)
 	};
 
