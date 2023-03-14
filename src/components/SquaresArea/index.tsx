@@ -9,7 +9,7 @@ type colorOptions = "color-1" | "color-2";
 interface props {
 	x: xOptions;
 	y: yOptions;
-	children:  readonly (readonly cell[])[];
+	children: readonly (readonly cell[])[];
 }
 
 const SquaresArea = ({ x, y, children: areaValues }: props) => {
@@ -17,35 +17,27 @@ const SquaresArea = ({ x, y, children: areaValues }: props) => {
 	const color = getBackgroundColor(areaId);
 
 	return (
-		<div className={Styles[color]}>
+		<>
 			{areaValues.map((line, lineIndex) => {
 				const yOption = ["top", "center", "bottom"][lineIndex] as yOptions;
 				const rowKey = areaId + `[${yOption[0]}]`;
 
 				return (
-					<React.Fragment key={rowKey}>
-						<br />
-						<div className={Styles.line}>
-							<div className={Styles["between-rows"]}></div>
-							{line.map((item, columnIndex) => {
-								const xOption = ["left", "middle", "right"][columnIndex] as xOptions;
-								const cellKey = areaId + `[${yOption[0] + xOption[0]}]`;
+					<div key={rowKey} className={Styles.area__line}>
+						{line.map((item, columnIndex) => {
+							const xOption = ["left", "middle", "right"][columnIndex] as xOptions;
+							const cellKey = areaId + `[${yOption[0] + xOption[0]}]`;
 
-								return (
-									<React.Fragment key={cellKey}>
-										<Square x={xOption} y={yOption}>
-											{item}
-										</Square>
-										<div className={Styles["between-rows"]}></div>
-									</React.Fragment>
-								);
-							})}
-						</div>
-					</React.Fragment>
+							return (
+								<Square key={cellKey} x={xOption} y={yOption}>
+									{item}
+								</Square>
+							);
+						})}
+					</div>
 				);
 			})}
-			<br />
-		</div>
+		</>
 	);
 
 	function getBackgroundColor(areaId: string): colorOptions {
