@@ -5,7 +5,6 @@ import { xOptions } from "../../types/xOptions";
 import { yOptions } from "../../types/yOptions";
 import { cell } from "../../types/cell";
 
-type colorOptions = "color-1" | "color-2";
 interface props {
 	x: xOptions;
 	y: yOptions;
@@ -14,7 +13,6 @@ interface props {
 
 const SquaresArea = ({ x, y, children: areaValues }: props) => {
 	const areaId = y[0] + x[0];
-	const color = getBackgroundColor(areaId);
 
 	return (
 		<>
@@ -40,13 +38,7 @@ const SquaresArea = ({ x, y, children: areaValues }: props) => {
 		</>
 	);
 
-	function getBackgroundColor(areaId: string): colorOptions {
-		if (["tm", "cr", "cl", "bm"].includes(areaId)) {
-			return "color-1";
-		}
 
-		return "color-2";
-	}
 };
 
 export default SquaresArea;

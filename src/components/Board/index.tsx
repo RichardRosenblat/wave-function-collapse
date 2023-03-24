@@ -10,7 +10,6 @@ import { useState, useEffect } from 'react'
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import StopIcon from '@mui/icons-material/Stop';
 import React from "react";
-import Styles from './Board.module.scss'
 
 const Board = () => {
 	const { board, restoreAll, collapseAll, startCollapsing, stopCollapsing } = useBoard();
@@ -26,8 +25,7 @@ const Board = () => {
 		} else {
 			stopCollapsing()
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isSolving])
+	}, [isSolving, startCollapsing, stopCollapsing])
 
 
 	const handleSolveAllClick = () => {
@@ -40,7 +38,7 @@ const Board = () => {
 
 	return (
 		<section>
-			<div className={Styles.board}>
+			<div>
 				{board.map((rowOfAreas, rowOfAreasIndex) => {
 					const yOption = ["top", "center", "bottom"][rowOfAreasIndex] as yOptions;
 					const rowOfAreasKey = yOption[0];
