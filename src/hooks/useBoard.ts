@@ -36,7 +36,7 @@ export const useBoard = () => {
 		});
 	};
 
-	const startCollapsing = (whenFinish: () => unknown = () => {}) => {
+	const startCollapsing = (onFinish: () => unknown = () => {}) => {
 		if (!intervalId) {
 			intervalId = setInterval(() => {
 				setBoard((prev) => {
@@ -44,7 +44,7 @@ export const useBoard = () => {
 					const hasACellCollapsed = collapseNextCell(mBoard);
 					if (!hasACellCollapsed) {
 						stopCollapsing();
-						whenFinish();
+						onFinish();
 					}
 					return mBoard;
 				});

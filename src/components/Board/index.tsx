@@ -10,6 +10,7 @@ import { useState, useEffect } from 'react'
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import StopIcon from '@mui/icons-material/Stop';
 import React from "react";
+import Styles from './Board.module.scss'
 
 const Board = () => {
 	const { board, restoreAll, collapseAll, startCollapsing, stopCollapsing } = useBoard();
@@ -37,8 +38,8 @@ const Board = () => {
 
 
 	return (
-		<section>
-			<div>
+		<section >
+			<div className={Styles.grid}>
 				{board.map((rowOfAreas, rowOfAreasIndex) => {
 					const yOption = ["top", "center", "bottom"][rowOfAreasIndex] as yOptions;
 					const rowOfAreasKey = yOption[0];
@@ -49,9 +50,11 @@ const Board = () => {
 								const xOption = ["left", "middle", "right"][areaIndex] as xOptions;
 								const areaKey = rowOfAreasKey + xOption[0];
 								return (
-									<SquaresArea y={yOption} x={xOption} key={areaKey}>
-										{area}
-									</SquaresArea>
+									<div className={Styles[`grid_${rowOfAreasIndex}_${areaIndex}`]}>
+										<SquaresArea y={yOption} x={xOption} key={areaKey}>
+											{area}
+										</SquaresArea>
+									</div>
 								);
 							})}
 						</React.Fragment>
