@@ -15,7 +15,7 @@ import { useCollapseMenu } from "../../hooks/useCollapseMenu";
 const Board = () => {
 	const { board, restoreAll, collapseAll, startCollapsing, stopCollapsing } = useBoard();
 
-	const [isSolving, setIsSolving] = useState(false)
+	// const [isSolving, setIsSolving] = useState(false)
 	const { selectedCell } = useCollapseMenu();
 
 

@@ -24,7 +24,7 @@ const SquaresArea = ({ x, y, children: areaValues }: props) => {
 						const cellKey = areaId + `[${yOption[0] + xOption[0]}]`;
 
 						return (
-							<Square key={cellKey} x={xOption} y={yOption}>
+							<Square key={cellKey}>
 								{item}
 							</Square>
 						);
