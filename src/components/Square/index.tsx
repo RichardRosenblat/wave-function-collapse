@@ -15,12 +15,12 @@ const Square = ({ x, y, children: cell }: props) => {
 
 	const firstValueFromCell = cell.possibleStates.values().next().value;
 
-	// return (
-	// 	<div onClick={() => open(cell)} className={Styles.color4}>
-	// 		{cell.hasCollapsed ? firstValueFromCell : "?"}
-	// 	</div>
-	// );
-	return <div>{y[0]+x[0]}</div>
+	return (
+		<div onClick={() => open(cell)} className={Styles.color4}>
+			{cell.hasCollapsed ? firstValueFromCell : "?"}
+		</div>
+	);
+	// return <div>{y[0]+x[0]}</div>
 };
 
 export default Square;

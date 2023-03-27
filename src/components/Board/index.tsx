@@ -9,7 +9,6 @@ import SendIcon from "@mui/icons-material/Send";
 import { useState, useEffect } from 'react'
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import StopIcon from '@mui/icons-material/Stop';
-import React from "react";
 import Styles from './Board.module.scss'
 
 const Board = () => {
@@ -29,12 +28,21 @@ const Board = () => {
 	}, [isSolving, startCollapsing, stopCollapsing])
 
 
-	const handleSolveAllClick = () => {
-		collapseAll()
-	};
 	const toggleSolving = () => {
 		setIsSolving(prev => !prev)
 	};
+	const handleSolveAllClick = () => {
+		collapseAll()
+	};
+	const handleToggleSolvingClick = () => {
+		toggleSolving()
+	};
+	const handleResetClick = () => {
+		if(isSolving){
+			toggleSolving()
+		}
+		restoreAll()
+	}
 
 
 	return (
@@ -45,31 +53,27 @@ const Board = () => {
 					const rowOfAreasKey = yOption[0];
 
 					return (
-						<React.Fragment key={rowOfAreasKey}>
-							{rowOfAreas.map((area, areaIndex) => {
-								const xOption = ["left", "middle", "right"][areaIndex] as xOptions;
-								const areaKey = rowOfAreasKey + xOption[0];
-								return (
-									<div className={Styles[`grid_${rowOfAreasIndex}_${areaIndex}`]}>
-										<SquaresArea y={yOption} x={xOption} key={areaKey}>
-											{area}
-										</SquaresArea>
-									</div>
-								);
-							})}
-						</React.Fragment>
+						rowOfAreas.map((area, areaIndex) => {
+							const xOption = ["left", "middle", "right"][areaIndex] as xOptions;
+							const areaKey = rowOfAreasKey + xOption[0];
+							return (
+								<SquaresArea y={yOption} x={xOption} key={areaKey}>
+									{area}
+								</SquaresArea>
+							);
+						})
 					);
 				})}
 			</div>
 
 			<div >
-				<Button variant="contained" onClick={restoreAll} startIcon={<RestartAltIcon />}>
+				<Button variant="contained" onClick={handleResetClick} startIcon={<RestartAltIcon />}>
 					Reset
 				</Button>
 
 				<Button
 					variant="contained"
-					onClick={toggleSolving}
+					onClick={handleToggleSolvingClick}
 					sx={{ marginLeft: "10px" }}
 					endIcon={isSolving ? <StopIcon /> : <SendIcon />}
 					color={isSolving ? 'error' : "primary"}

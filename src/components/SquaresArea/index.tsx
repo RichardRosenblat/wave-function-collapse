@@ -20,19 +20,19 @@ const SquaresArea = ({ x, y, children: areaValues }: props) => {
 				const rowKey = areaId + `[${yOption[0]}]`;
 
 				return (
-					<div key={rowKey} >
-						{line.map((item, columnIndex) => {
-							const xOption = ["left", "middle", "right"][columnIndex] as xOptions;
-							const cellKey = areaId + `[${yOption[0] + xOption[0]}]`;
+					line.map((item, columnIndex) => {
+						const xOption = ["left", "middle", "right"][columnIndex] as xOptions;
+						const cellKey = areaId + `[${yOption[0] + xOption[0]}]`;
 
-							// return (
-							// 	<Square key={cellKey} x={xOption} y={yOption}>
-							// 		{item}
-							// 	</Square>
-							// );
-							return <div className={Styles[`grid_${lineIndex}_${columnIndex}`]}>{yOption[0] + xOption[0]}</div>
-						})}
-					</div>
+						return (
+							<Square key={cellKey} x={xOption} y={yOption}>
+								{item}
+							</Square>
+						);
+
+
+						// return <div className={Styles[`position_${lineIndex}_${columnIndex}`]}>{cellKey}</div>
+					})
 				);
 			})}
 		</div>
