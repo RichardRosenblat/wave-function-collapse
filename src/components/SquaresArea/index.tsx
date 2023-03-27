@@ -17,7 +17,6 @@ const SquaresArea = ({ x, y, children: areaValues }: props) => {
 		<div className={Styles.grid}>
 			{areaValues.map((line, lineIndex) => {
 				const yOption = ["top", "center", "bottom"][lineIndex] as yOptions;
-				const rowKey = areaId + `[${yOption[0]}]`;
 
 				return (
 					line.map((item, columnIndex) => {
@@ -29,9 +28,6 @@ const SquaresArea = ({ x, y, children: areaValues }: props) => {
 								{item}
 							</Square>
 						);
-
-
-						// return <div className={Styles[`position_${lineIndex}_${columnIndex}`]}>{cellKey}</div>
 					})
 				);
 			})}

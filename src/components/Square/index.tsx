@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useCollapseMenu } from "../../hooks/useCollapseMenu";
 import { cell } from "../../types/cell";
 import { xOptions } from "../../types/xOptions";
@@ -11,16 +12,24 @@ interface props {
 }
 
 const Square = ({ x, y, children: cell }: props) => {
-	const { open } = useCollapseMenu();
+	const { open, selectedCell } = useCollapseMenu();
 
 	const firstValueFromCell = cell.possibleStates.values().next().value;
 
+	const handleCellClick = () => { open(cell) };
+	;
 	return (
-		<div onClick={() => open(cell)} className={Styles.color4}>
+		<div 
+			onClick={handleCellClick} 
+			className={Styles[
+				'cell' + (cell.hasCollapsed ? '_solved' : '') + 
+				(selectedCell?.id === cell.id && !cell.hasCollapsed ? '_selected' : '')
+				]
+			}
+			>
 			{cell.hasCollapsed ? firstValueFromCell : "?"}
 		</div>
 	);
-	// return <div>{y[0]+x[0]}</div>
 };
 
 export default Square;
