@@ -11,14 +11,25 @@
     &:hover{
         background-color: #e6e6e6;
     }
-    &_selected{
-        @extend .cell;
+    &--selected{
         background-color: #e6e6e6;
     }
-    &_solved{
-        @extend .cell;
+    &--solved{
         background-color: #e6e6e6;
         color: #000;
         cursor: default;
     }
+    &__thickBorderRight{
+        border-right: 3px solid black;
+    }
+    &__thickBorderBottom{
+        border-bottom: 3px solid black;
+    }
+    &__thickBorderLeft{
+        border-left: 3px solid black;
+    }
+    &__thickBorderTop{
+        border-top: 3px solid black;
+    }
+
 }
