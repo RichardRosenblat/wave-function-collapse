@@ -7,13 +7,13 @@ import { collapseCell } from "../logic/collapseCell";
 import { calculateCellStates } from "../logic/calculateStates";
 import { collapseNextCell } from "../logic/collapseAllCells";
 import { getCellCoordinatesFromId } from "../util/getCellCoordinatesFromId";
-import { useState } from "react";
+import { isSolvingState } from "../states/isSolvingState";
 
 let intervalId: NodeJS.Timer | null = null;
 
 export const useBoard = () => {
 	const [board, setBoard] = useRecoilState(boardState);
-	const [isSolving, setIsSolving] = useState(false);
+	const [isSolving, setIsSolving] = useRecoilState(isSolvingState);
 
 	const collapse = (cell: cell, into: number) => {
 		setBoard((prev) => {
@@ -40,6 +40,7 @@ export const useBoard = () => {
 
 	const startCollapsing = (onFinish: () => unknown = () => {}) => {
 		if (!intervalId) {
+			// TODO we need to use recoil nexus to this to work properly
 			setIsSolving(true);
 			intervalId = setInterval(() => {
 				setBoard((prev) => {
@@ -51,6 +52,7 @@ export const useBoard = () => {
 					}
 					return mBoard;
 				});
+				
 			}, 200);
 		}
 	};
