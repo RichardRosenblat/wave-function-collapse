@@ -7,13 +7,13 @@ import { collapseCell } from "../logic/collapseCell";
 import { calculateCellStates } from "../logic/calculateStates";
 import { collapseNextCell } from "../logic/collapseAllCells";
 import { getCellCoordinatesFromId } from "../util/getCellCoordinatesFromId";
-import { isSolvingState } from "../states/isSolvingState";
+import { useState } from "react";
 
 let intervalId: NodeJS.Timer | null = null;
 
 export const useBoard = () => {
 	const [board, setBoard] = useRecoilState(boardState);
-	const [isSolving, setIsSolving] = useRecoilState(isSolvingState);
+	const [isSolving, setIsSolving] = useState(false);
 
 	const collapse = (cell: cell, into: number) => {
 		setBoard((prev) => {

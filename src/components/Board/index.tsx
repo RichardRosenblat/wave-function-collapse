@@ -6,33 +6,23 @@ import { useBoard } from "../../hooks/useBoard";
 import { Button } from "@mui/material";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import SendIcon from "@mui/icons-material/Send";
-import { useState, useEffect } from 'react'
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import StopIcon from '@mui/icons-material/Stop';
 import Styles from './Board.module.scss'
 import { useCollapseMenu } from "../../hooks/useCollapseMenu";
 
 const Board = () => {
-	const { board, restoreAll, collapseAll, startCollapsing, stopCollapsing } = useBoard();
-
-	// const [isSolving, setIsSolving] = useState(false)
+	const { isSolving, board, restoreAll, collapseAll, startCollapsing, stopCollapsing } = useBoard();
 	const { selectedCell } = useCollapseMenu();
 
-
-	useEffect(() => {
+	const toggleSolving = () => {
 		if (isSolving) {
+			stopCollapsing()
+		} else {
 			startCollapsing(() => {
 				alert('No more cells left to collapse');
-				toggleSolving()
 			})
-		} else {
-			stopCollapsing()
 		}
-	}, [isSolving, startCollapsing, stopCollapsing])
-
-
-	const toggleSolving = () => {
-		setIsSolving(prev => !prev)
 	};
 	const handleSolveAllClick = () => {
 		collapseAll()
@@ -70,10 +60,10 @@ const Board = () => {
 			</div>
 
 			<div className={Styles.controls} >
-				<Button 
+				<Button
 					variant="contained"
 					disabled={!!selectedCell}
-					onClick={handleResetClick} 
+					onClick={handleResetClick}
 					startIcon={<RestartAltIcon />}
 				>
 					Reset
