@@ -42,15 +42,18 @@ export const useBoard = () => {
 		if (!intervalId) {
 			setIsSolving(true);
 			intervalId = setInterval(() => {
+				let hasACellCollapsed: null | boolean = null;
+
 				setBoard((prev) => {
 					const mBoard = getMutableBoard(prev);
-					const hasACellCollapsed = collapseNextCell(mBoard);
-					if (!hasACellCollapsed) {
-						// stopCollapsing();
-						onFinish();
-					}
+					hasACellCollapsed = collapseNextCell(mBoard);
 					return mBoard;
 				});
+
+				if (!hasACellCollapsed && hasACellCollapsed !== null) {
+					stopCollapsing();
+					onFinish();
+				}
 			}, 200);
 		}
 	};
