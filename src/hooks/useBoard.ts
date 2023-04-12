@@ -40,19 +40,17 @@ export const useBoard = () => {
 
 	const startCollapsing = (onFinish: () => unknown = () => {}) => {
 		if (!intervalId) {
-			// TODO we need to use recoil nexus to this to work properly
 			setIsSolving(true);
 			intervalId = setInterval(() => {
 				setBoard((prev) => {
 					const mBoard = getMutableBoard(prev);
 					const hasACellCollapsed = collapseNextCell(mBoard);
 					if (!hasACellCollapsed) {
-						stopCollapsing();
+						// stopCollapsing();
 						onFinish();
 					}
 					return mBoard;
 				});
-				
 			}, 200);
 		}
 	};
