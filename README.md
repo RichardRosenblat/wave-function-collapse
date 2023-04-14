@@ -1,46 +1,34 @@
-# Getting Started with Create React App
+# Wave Function Collapse
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a React project that implements the **Wave Function Collapse Algorithm** in a simple application to solve a Sudoku Puzzle.
 
-## Available Scripts
+## What is a Wave Function Collapse Algorithm?
 
-In the project directory, you can run:
+The WFCA (Wave function Collapse Algorithm) is a way to generate random patterns that *"Make sense"* by following a given set of rules.  
+**It is based in concepts from quantum mechanics!** and it looks very complex but in reality it's quite simple once you understand it's core concepts and the steps that it takes to generate the random pattern.  
 
-### `npm start`
+The Algorithm works with these core concepts
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. A grid of cells with multiple states
+2. A set of rules that these states must obey
+3. A way to collapse a cell's state
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## WFCA applications
 
-### `npm test`
+## Usage
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Installing the project
 
-### `npm run build`
+### Running the project
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Using the application
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Stack
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Contributing
 
-### `npm run eject`
+If you want to contribute to this project, feel free to submit a pull request. Please make sure to follow the existing coding style and add appropriate tests for any new functionality.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## License
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Contact information
