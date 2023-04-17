@@ -1,11 +1,11 @@
 # Wave Function Collapse
 
-This is a React project that implements the **Wave Function Collapse Algorithm** in a simple application to solve a Sudoku Puzzle.
+This is a React project that implements the **Wave Function Collapse Algorithm** in a simple application to solve a Sudoku puzzle.
 
 ## What is a Wave Function Collapse Algorithm?
 
-The WFCA (Wave function Collapse Algorithm) is a way to generate random patterns that *"Make sense"* by following a given set of rules.  
-**It is based in fundamental concepts from quantum mechanics! How cool is that?**  
+The WFCA (Wave Function Collapse Algorithm) is a way to generate random patterns that *"Make sense"* by following a given set of rules.  
+**It is based on fundamental concepts from quantum mechanics! How cool is that?**  
 It looks very complex, but in reality it's quite simple once you understand it's core concepts and the steps that it takes to generate the random patterns.  
 
 ### How does it work
@@ -41,15 +41,53 @@ And Thats it! The Wave Function Collapsed into a single state!
 
 ## WFCA applications
 
+The WFCA can be used in many fields and applications, one of the most interesting is in the field of entretainiment, where it is used in games to generate maps and levels that look natural but are random enough to garantee a diffent playthrough each time.
+
 ## Project's usage
 
 ### Installing the project
 
+To install the project you first need to clone the reposity
+
+```bash
+git clone https://github.com/RichardRosenblat/wave-function-collapse.git
+```
+
+And then install the projects depedencies
+
+```bash
+npm install
+```
+
+or
+
+```bash
+yarn install
+```
+
 ### Running the project
 
-### Using the application
+To run the project you can use the npm script start, just be sure to have your terminal on the project's root directory.
+
+```bash
+npm start
+```
+
+or
+
+```bash
+yarn start
+```
 
 ## Stack
+
+This aplication was created using these technologies
+
+- React
+- Material Ui
+- recoil
+- classnames
+- normalize.css
 
 ## Contributing
 
@@ -57,4 +95,10 @@ If you want to contribute to this project, feel free to submit a pull request. P
 
 ## License
 
+MIT
+
 ## Contact information
+
+Richard Rosenblat - rosenblatr@gmail.com  
+[LinkedIn](https://www.linkedin.com/in/richard-rosenblat/)  
+[Github](https://github.com/RichardRosenblat)
