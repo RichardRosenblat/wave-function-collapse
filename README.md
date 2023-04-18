@@ -39,20 +39,22 @@ The Wave Function Collapse Algorithm is just a set of steps based on the concept
 3. Now that a cell has been **collapsed**, this must change the possible states of at least one other cell, removing one or more of them.
 
     > For example, in the Sudoku board, writing the number 1 in a cell will take that possible state from all of the surrounding cells and both the cells on the same horizontal and vertical lines of the one we collapsed.
-    > ![the grid has multiple cells with multiple states](https://github.com/RichardRosenblat/wave-function-collapse/blob/main/github_assets/5.png?raw=true)
+    > ![the cells around this collapsed cell loose states](https://github.com/RichardRosenblat/wave-function-collapse/blob/main/github_assets/5.png?raw=true)
     >
 4. When a cell **loses one or more possible states**, we can say it lost entropy, having a lesser value of entropy than a cell that has more possible states. So now we must select a random cell from the group of cells that has the smallest amount of possible states (the smallest amount of entropy).
 
     > Back at the Sudoku example, we pick a random cell from the ones that lost the number 1 from their possible states during the last example.
-    > ![the grid has multiple cells with multiple states](https://github.com/RichardRosenblat/wave-function-collapse/blob/main/github_assets/6.png?raw=true)
+    > ![we collapse another cell](https://github.com/RichardRosenblat/wave-function-collapse/blob/main/github_assets/6.png?raw=true)
     >
 5. Now we must **collapse the cell that has been picked from the previous step**, into a random state of its possible states.
 
     > Just like step 2 and 3, this is simply writing a random value on the cell from its possible values. For example, the number 9.
+    > ![Just like before the cells around the collapsed cell loose states](https://github.com/RichardRosenblat/wave-function-collapse/blob/main/github_assets/7.png?raw=true)
     >
 6. Now we **repeat the steps 2-5**, until all cells have been collapsed and the grid cannot have any other state.
 
     > In the Sudoku example, this is simply repeating the steps before until the game is finished.
+    >![the function stops when the game is finished](https://github.com/RichardRosenblat/wave-function-collapse/blob/main/github_assets/8.png?raw=true)
     >
 
 And that's it! The Wave Function has collapsed into a single state!
