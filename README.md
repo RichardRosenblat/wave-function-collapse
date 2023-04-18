@@ -1,6 +1,8 @@
 # Wave Function Collapse
 
-This is a React project that implements the **Wave Function Collapse Algorithm** in a simple application to solve a Sudoku puzzle.
+This is a React project that implements the **Wave Function Collapse Algorithm** to solve Sudoku puzzles.  
+The project provides a simple web application where users can input a Sudoku puzzle, and the algorithm will generate a solution that follows the rules of the game.  
+The project is built using React, Material UI, Recoil, Classnames, and Normalize.css. The main goal of this project is to showcase the power of the Wave Function Collapse Algorithm and its potential applications in game development and other fields.
 
 ## What is the Wave Function Collapse Algorithm?
 
@@ -29,15 +31,15 @@ The Wave Function Collapse Algorithm is just a set of steps based on the concept
     >
 3. Now that a cell has been **collapsed**, this must change the possible states of at least one other cell, removing one or more of them.
 
-    > For example, in the Sudoku board, writing the number 9 in a cell will take that possible state from all of the surrounding cells and both the cells on the same horizontal and vertical lines of the one we collapsed.
+    > For example, in the Sudoku board, writing the number 1 in a cell will take that possible state from all of the surrounding cells and both the cells on the same horizontal and vertical lines of the one we collapsed.
     >
 4. When a cell **loses one or more possible states**, we can say it lost entropy, having a lesser value of entropy than a cell that has more possible states. So now we must select a random cell from the group of cells that has the smallest amount of possible states (the smallest amount of entropy).
 
-    > Back at the Sudoku example, we pick a random cell from the ones that lost the number 9 from their possible states during the last example.
+    > Back at the Sudoku example, we pick a random cell from the ones that lost the number 1 from their possible states during the last example.
     >
 5. Now we must **collapse the cell that has been picked from the previous step**, into a random state of its possible states.
 
-    > Just like step 2 and 3, this is simply writing a random value on the cell from its possible values. For example, the number 8.
+    > Just like step 2 and 3, this is simply writing a random value on the cell from its possible values. For example, the number 9.
     >
 6. Now we **repeat the steps 2-5**, until all cells have been collapsed and the grid cannot have any other state.
 
@@ -48,7 +50,13 @@ And that's it! The Wave Function has collapsed into a single state!
 
 ## WFC Algorithm applications
 
-The WFC Algorithm can be used in many fields and applications. One of the most interesting is in the field of entertainment, where it is used in games to generate maps and levels that look natural but are random enough to guarantee a different playthrough each time.
+The Wave Function Collapse algorithm is a powerful technique that can be used in many applications, especially in the field of **game development**. One of the main benefits of using the WFC algorithm is that it can generate random patterns that follow a given set of rules. This means that developers can use the WFC algorithm to generate game maps, levels, or puzzles that are unique and different every time, while still adhering to the game's rules and constraints.
+
+For example, in a game like Minecraft, the WFC algorithm can be used to generate random terrain that looks natural and organic, while still following the game's rules of physics and block placement. In a game like Super Mario, the WFC algorithm can be used to generate random levels that have a different layout and difficulty every time the game is played.
+
+Another benefit of using the WFC algorithm is that it can **save developers a lot of time and effort**. Instead of manually designing and creating levels or puzzles, developers can use the WFC algorithm to generate them automatically. This can be especially useful in games that have a large number of levels or puzzles, as it can significantly reduce the development time and cost.
+
+Overall, the WFC algorithm is a powerful tool that can be used in many different applications. Its ability to generate random patterns that follow a given set of rules makes it especially useful in game development, where unique and diverse content is essential to keep players engaged and interested.
 
 ## Project usage
 
@@ -57,7 +65,7 @@ The WFC Algorithm can be used in many fields and applications. One of the most i
 To install the project, you first need to clone the repository
 
 ```bash
-git clone <https://github.com/RichardRosenblat/wave-function-collapse.git>
+git clone https://github.com/RichardRosenblat/wave-function-collapse.git
 
 ```
 
