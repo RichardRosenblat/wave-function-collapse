@@ -130,4 +130,4 @@ MIT
 
 ## Contact information
 
-Richard Rosenblat - [rosenblatr@gmail.com](mailto:rosenblatr@gmail.com)[LinkedIn](https://www.linkedin.com/in/richard-rosenblat/)[Github](https://github.com/RichardRosenblat)
+Richard Rosenblat - [rosenblatr@gmail.com](mailto:rosenblatr@gmail.com) | [LinkedIn](https://www.linkedin.com/in/richard-rosenblat/) | [Github](https://github.com/RichardRosenblat)
